@@ -252,7 +252,7 @@ AC_TRY_COMPILE([#include <netinet/in.h>], [
 #
 # Detecting the linux distribution for specific things like init scripts.
 #
-AC_ARG_WITH(distro, AS_HELP_STRING([--with-distro=DISTRO],[Specify the distribution to target: One of lfs, debian, gentoo, archlinux, fedora, mandriva, darwin, netbsd, freebsd, slackware or none]))
+AC_ARG_WITH(distro, AS_HELP_STRING([--with-distro=DISTRO],[Specify the distribution to target: One of lfs, debian, gentoo, archlinux, fedora, mandriva, darwin, netbsd, freebsd, slackware, ufolinux or none]))
 if test "z$with_distro" = "z"; then
     if test "$cross_compiling" = yes; then
         AC_MSG_WARN([Target distribution cannot be reliably detected when cross-compiling. You should specify it with --with-distro (see $0 --help for recognized distros)])
@@ -273,7 +273,7 @@ fi
 with_distro=`echo ${with_distro} | tr '[[:upper:]]' '[[:lower:]]' `
 
 case $with_distro in
-    lfs|debian|gentoo|archlinux|suse|fedora|mandriva|darwin|freebsd|slackware|none)
+    lfs|debian|gentoo|archlinux|suse|fedora|mandriva|darwin|freebsd|slackware|ufolinux|none)
      ;;
     netbsd)
      AC_MSG_WARN([Your distribution (${with_distro}) is supported but no init script exist yet! (patches welcome)])
@@ -297,6 +297,7 @@ AM_CONDITIONAL(TARGET_DARWIN, test x"$with_distro" = xdarwin)
 AM_CONDITIONAL(TARGET_NETBSD, test x"$with_distro" = xnetbsd)
 AM_CONDITIONAL(TARGET_FREEBSD, test x"$with_distro" = xfreebsd)
 AM_CONDITIONAL(TARGET_SLACKWARE, test x"$with_distro" = xslackware)
+AM_CONDITIONAL(TARGET_SLACKWARE, test x"$with_distro" = xufolinux)
 
 test_gcc_flag() {
     AC_LANG_CONFTEST([int main(void) {}])
